@@ -915,5 +915,6 @@ const handleItem = (item) => {
 4. **useSelector**: Subscribes to specific state slices to read data.
 5. **useDispatch**: Dispatches actions to modify the state.
 
-By following this setup, you can efficiently manage state using Redux Toolkit and React, ensuring your components remain clean and your app performant!#   N a m a s t e - R e a c t - 8 - 1 2  
+By following this setup, you can efficiently manage state using Redux Toolkit and React, ensuring your components remain clean and your app performant!#   N a m a s t e - R e a c t - 8 - 1 2 
+ 
  
