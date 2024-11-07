@@ -1,3 +1,129 @@
+### Episode 1: Inception 🌟
+
+---
+
+#### 1. Creating a React Element in HTML using React CDN 🏗️
+To start with React in an HTML file, you can include the React and ReactDOM libraries using CDN links.
+
+   ```html
+   <!-- Add React and ReactDOM via CDN -->
+   <div id="root"></div>
+   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+   ```
+
+#### 2. Creating a React Element
+
+   ```javascript
+   // Creating a basic React element
+   let heading = React.createElement("element", { id: "root" }, "data to be inserted in element");
+   console.log(heading); // Outputs a React element, which is an object.
+   ```
+
+**Example of Nested Elements:**
+
+   ```javascript
+   // Nested React elements with siblings
+   let heading = React.createElement(
+       "div", { id: "parent" },
+       React.createElement("div", { id: "child" }, [
+           React.createElement("h1", { id: "tag" }, "I'm h1 tag"),
+           React.createElement("h2", { id: "tag" }, "I'm h2 tag")
+       ])
+   );
+   ```
+
+   - **Note:** Sibling elements can be passed in an array `[]`.
+   - **React Element** is a plain JavaScript object. When rendered on the DOM, it's converted into an HTML element.
+
+#### 3. Creating Root 🌳
+
+   ```javascript
+   // Converting the React element into an HTML element and attaching it to the root element
+   ReactDOM.createRoot(document.getElementById("root")).render(heading);
+   ```
+
+---
+
+### Episode 2: Igniting Our App 🚀
+
+---
+
+#### Setting Up a React App with npm
+
+1. **npm Basics**:
+    - npm doesn’t officially stand for "Node Package Manager"; it’s simply "npm." 📦
+
+2. **Steps to Initialize a React Project**:
+    - **Initialize npm**: Run `npm init` and enter details like description, test command (e.g., `jest`), keywords, author, etc. This creates a `package.json` file.
+    - **Install Parcel**: `npm install -D parcel` adds Parcel as a development dependency (`-D` for devDependencies).
+    - **Install React and ReactDOM**: `npm install react react-dom` to add React and ReactDOM as dependencies.
+
+#### About package.json 📄
+   - **package.json**: Tracks version information for all dependencies installed.
+   - **Version Control Symbols**:
+      - **Caret (^)**: Allows minor version updates. Example: `^2.3.3` updates to `2.3.4`.
+      - **Tilde (~)**: Allows only patch updates. Example: `~2.3.3` updates to `2.3.3`, but not `2.4.0`.
+
+#### Types of Dependencies
+
+1. **devDependencies**: Only needed during development.
+2. **dependencies**: Needed in both development and production.
+
+---
+
+#### Working with Parcel 📦
+
+- Parcel is a bundler with several features:
+  - **HMR (Hot Module Replacement)**: Updates changes without a full page reload.
+  - **File Watching**: Efficient file monitoring.
+  - **Caching**: Speeds up builds through caching.
+  - **Image Optimization, Minification, Code Splitting, and Tree Shaking**: Optimizes app performance.
+  - **Differential Bundling**: Supports older browsers by generating appropriate bundles.
+  
+- **Commands**:
+  - Start Parcel server: `npx parcel index.html`
+  - Production build: `npx parcel build index.html`
+
+---
+
+#### File Structure and Configurations
+
+1. **package-lock.json**:
+   - Keeps track of exact versions installed, including transitive dependencies (dependencies of dependencies).
+
+2. **node_modules**:
+   - The storage of all packages and their dependencies.
+
+3. **Transitive Dependencies**:
+   - Dependencies within dependencies, managed by npm for consistency.
+
+4. **Browserslist Configuration**:
+   - Define supported browser versions in `package.json`:
+     ```json
+     "browserslist": ["last 1 Chrome version", "last 2 Firefox versions"]
+     ```
+   - Check [browserslist.dev](https://browserslist.dev) or [Browserslist GitHub](https://github.com/browserslist/browserslist#query-composition) for more.
+
+#### Avoid Uploading Certain Files on GitHub
+- **Do Not Upload**: `.parcel-cache`, `dist`, and `node_modules` (since they can be regenerated).
+
+---
+
+### Additional Notes 🤔
+
+- **Why is React Fast?**: React uses bundlers and optimizations to enhance rendering and updating speeds.
+- **npx**: Useful for running Node.js packages directly without global installation.
+
+With these notes, you’re set up to start with React, understand npm, and utilize Parcel for efficient development. Enjoy coding! 🎉
+
+
+
+
+
+
+
+
 # LEC_ 8
 
 ## Class  based component 
