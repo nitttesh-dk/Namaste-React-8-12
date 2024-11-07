@@ -1,121 +1,656 @@
-### Episode 1: Inception 🌟
+## Episode 1: Inception 🌟
 
----
-
-#### 1. Creating a React Element in HTML using React CDN 🏗️
-To start with React in an HTML file, you can include the React and ReactDOM libraries using CDN links.
-
-   ```html
-   <!-- Add React and ReactDOM via CDN -->
-   <div id="root"></div>
-   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-   ```
-
-#### 2. Creating a React Element
+1. Creating an React Element in HTML using React CDN 🏗️
+    ```html
+    react cdn
+    <div id="root"></div>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    ```
 
    ```javascript
-   // Creating a basic React element
    let heading = React.createElement("element", { id: "root" }, "data to be inserted in element");
-   console.log(heading); // Outputs a React element, which is an object.
+   console.log(heading); // This is a React element and it is an object.
+
+
+   let heading = React.createElement("div", {id:"parent"}, 
+    React.createElement("div", {id:"child"}, 
+        [ 
+            React.createElement("h1", {id:"tag"}, "I'm h1 tag"), 
+            React.createElement("h2", {id:"tag"}, "I'm h2 tag"),
+        ]
+    )
+)
    ```
+    To Pass element in the form of siblings then write it in an array - [].
 
-**Example of Nested Elements:**
 
+   React is a JavaScript library
+   ✨ React element is a plain javascript object.
+    ✨ when we render it on DOM then it's converted into HTML element.
+
+2. Creating Root 🌳
    ```javascript
-   // Nested React elements with siblings
-   let heading = React.createElement(
-       "div", { id: "parent" },
-       React.createElement("div", { id: "child" }, [
-           React.createElement("h1", { id: "tag" }, "I'm h1 tag"),
-           React.createElement("h2", { id: "tag" }, "I'm h2 tag")
-       ])
-   );
-   ```
-
-   - **Note:** Sibling elements can be passed in an array `[]`.
-   - **React Element** is a plain JavaScript object. When rendered on the DOM, it's converted into an HTML element.
-
-#### 3. Creating Root 🌳
-
-   ```javascript
-   // Converting the React element into an HTML element and attaching it to the root element
    ReactDOM.createRoot(document.getElementById("root")).render(heading);
+   // The render() method converts the heading (which is an object) into an HTML Element & put it into the root element.
    ```
 
----
+3. Props 📦
+   - Props are the attributes and children present inside an element.
 
-### Episode 2: Igniting Our App 🚀
 
----
+## Episode 2: Igniting Our App 🚀.
 
-#### Setting Up a React App with npm
+-> 📦 npm
+    - npm doesn't stand for "node package manager"; it can be anything fun like "neverending prototype mode" or "nesty pizza manager." 🍕
+    - While npm manages packages, it doesn't have a definitive full form.
+    - npm manages packages but doesn't stand for `Node Package Manager`. 📦
+Steps:
+    - npm init => write description, test command: jest, git repository, keywords: give any word, author - OUR NAME, license --> package.json file ll'be created
+    - npm install -D parcel => parcel is a bundler, -D is for devDependencies
+    - npx parcel index.html => to run the parcel
+    - npm install react react-dom => to install react and react-dom
 
-1. **npm Basics**:
-    - npm doesn’t officially stand for "Node Package Manager"; it’s simply "npm." 📦
 
-2. **Steps to Initialize a React Project**:
-    - **Initialize npm**: Run `npm init` and enter details like description, test command (e.g., `jest`), keywords, author, etc. This creates a `package.json` file.
-    - **Install Parcel**: `npm install -D parcel` adds Parcel as a development dependency (`-D` for devDependencies).
-    - **Install React and ReactDOM**: `npm install react react-dom` to add React and ReactDOM as dependencies.
+-> 📄 package.json
+    - package.json is a configuratio for npm.
+    - It tracks the versions of the packages installed on our system. 📜
+    - It can use caret(^) and tilde(~) for version control.
 
-#### About package.json 📄
-   - **package.json**: Tracks version information for all dependencies installed.
-   - **Version Control Symbols**:
-      - **Caret (^)**: Allows minor version updates. Example: `^2.3.3` updates to `2.3.4`.
-      - **Tilde (~)**: Allows only patch updates. Example: `~2.3.3` updates to `2.3.3`, but not `2.4.0`.
+-> Bundler -> it bundles our app or packages our app and shift it to the production server.
+    - eg: parcel, webpack, vite
 
-#### Types of Dependencies
+-> 🎯 Caret (^) and Tilde (~)
+    - Caret (^): Updates minor versions automatically.
+        - e.g., `^2.3.3` can update to `2.3.4`. 🔄
+    - Tilde (~): Updates major versions automatically.
+        - e.g., `~2.3.3` can update to `3.0.0`. 🚀
+    - It's recommended to use caret (^) instead of tilde (~) because major updates might break the code. ⚠️
 
-1. **devDependencies**: Only needed during development.
-2. **dependencies**: Needed in both development and production.
+-> 🔗 Two Types of Dependencies
+    1. devDependencies: Required during the development phase. 💻
+    2. Dependencies: Used in production as well. 🌐
 
----
+-> 📦 parcel
+    - Parcel is a bundler. 📦
+    - Install it using: `npm install -D parcel` (adds Parcel as a devDependency). ⚙️
 
-#### Working with Parcel 📦
+-> 🔒 package-lock.json
+    - Keeps the exact versions that are installed. 📌
+    - It contains the exact version of Transitive dependencies also. 🔄
+-> package.json
+    - keeps the aprox version of the packages.
 
-- Parcel is a bundler with several features:
-  - **HMR (Hot Module Replacement)**: Updates changes without a full page reload.
-  - **File Watching**: Efficient file monitoring.
-  - **Caching**: Speeds up builds through caching.
-  - **Image Optimization, Minification, Code Splitting, and Tree Shaking**: Optimizes app performance.
-  - **Differential Bundling**: Supports older browsers by generating appropriate bundles.
-  
-- **Commands**:
-  - Start Parcel server: `npx parcel index.html`
-  - Production build: `npx parcel build index.html`
+-> Node modules : it is like a database where all the packages are stored.
+    - node modules are the collections of our packages
 
----
+-> 🔄 Transitive Dependencies
+    - Dependencies that have their own dependencies, and those dependencies also have their own dependencies, and so on.
+    - Example: `node_modules` 📚
 
-#### File Structure and Configurations
+-> 📜 Package Files
+    - Every dependency has its own `package.json` and `package-lock.json`. 🗂️
 
-1. **package-lock.json**:
-   - Keeps track of exact versions installed, including transitive dependencies (dependencies of dependencies).
+-> 🚀 NPX: To Excute any package
+    - write npx and packageName it will run that package.
+    - npx: A tool for running Node.js packages, scripts, and binaries without the need for global installation.
 
-2. **node_modules**:
-   - The storage of all packages and their dependencies.
+-> 📦 Parcel: The Ultimate Bundler
+Parcel offers a suite of features to streamline development and optimize your web projects:
 
-3. **Transitive Dependencies**:
-   - Dependencies within dependencies, managed by npm for consistency.
+Pracel Provides with:
+   - Dev Build & Local Server: Quickly set up development environments.
+   - HMR (Hot Module Replacement): Automatically update modules without a full refresh.
+   - File Watching Algorithm: Written in C++ for efficient file monitoring.
+   - Cachings: Faster builds(Refreshig Page) through caching mechanisms.
+   - Image Optimization: Reduce image sizes for faster load times.
+   - Minification: Compress code to reduce file sizes.
+   - Bundling: Combine multiple files into one.
+   - Compression: Further reduce file sizes by removing all white space for optimal performance.
+   - Consistent Hashing: Ensure stable hashed filenames for caching.
+   - Code Splitting: Load only the necessary code for faster initial load.
+   - Differential Bundling: Support for older browsers with appropriate bundles.
+   - Diagnostics & Error Handling: Built-in tools for debugging.
+   - HTTPS: Secure your local development server.
+   - Tree Shaking: Remove unused code to optimize performance.
 
-4. **Browserslist Configuration**:
-   - Define supported browser versions in `package.json`:
-     ```json
-     "browserslist": ["last 1 Chrome version", "last 2 Firefox versions"]
+-> For Production build run `npx parcel build index.html`
+
+-> From Package.json file remove "main": "script.js", bcoz while running `npx parcel build index.html` it will not give error.
+
+-> Don't upload .parcel-cache, dist & node_modules on github, the files that can be re-generated again don't put that file on github
+
+-> 🤔 Why is React Fast?
+   React is designed for performance. It utilizes various bundlers and optimization techniques, such as `Parcel`, to ensure fast rendering and efficient updates.
+
+-> 📜 Browserslist Configuration
+   In your `package.json`, you can specify the target browsers for your project:
+   ```json
+   "dependencies":{
+    ......something........
+   },
+   "browserslist": ["last 1 Chrome version", "last 2 Firefox versions"]
+   ```
+   This configuration ensures your code will only work in the specified versions of Chrome and Firefox, excluding other browsers like Edge and Safari. For more information, visit [browserslist.dev](https://browserslist.dev).
+   - You can also specify the country also visit[https://github.com/browserslist/browserslist#query-composition] : read this github repo.
+
+
+## Episode 3: Laying the Foundation 🚀
+
+1. Running Programs 🏃‍♂️
+   - Whenever you don't know how to run a program, check the `package.json`. The scripts section will show you the commands.
+
+   "scripts": {
+    "start":"parcel index.html",    -> production build
+    "build":"parcel build index.html",      ->development build
+  },
+   - Example:
      ```
-   - Check [browserslist.dev](https://browserslist.dev) or [Browserslist GitHub](https://github.com/browserslist/browserslist#query-composition) for more.
+     npm run start === npm start
+     ```
 
-#### Avoid Uploading Certain Files on GitHub
-- **Do Not Upload**: `.parcel-cache`, `dist`, and `node_modules` (since they can be regenerated).
+2. JSX ✨
+    - JavaScript Syntax to create React Element
+   - JSX is not part of React.
+   - In JSX, we don't write HTML inside JavaScript; it's different.
+   - JSX is an HTML-like or XML-like syntax.
 
----
+3. First the code is wriiten for whom machine / people
+    - first it's for humans bcoz many developers are going to read this
+    - and afterwards we are writting for the machine.
 
-### Additional Notes 🤔
+3. Babel 🔧
+    - JSX code is transpiled before it reaches to Browser/ Js Engine manage by Parcel.
+   - Babel is a JavaScript compiler/transpiler.
+   - It converts code into a format that the JavaScript engine understands.
+   - Babel is a library and is not created by Facebook.
 
-- **Why is React Fast?**: React uses bundlers and optimizations to enhance rendering and updating speeds.
-- **npx**: Useful for running Node.js packages directly without global installation.
+4. React Code Conversion 🔄 -> Babel is responsible to convert it into JSX
+   - First, React code is converted into `React.createElement`.
+   - Then, it is transformed into a JavaScript object.
+   - Finally, it is converted into an HTML element.
 
-With these notes, you’re set up to start with React, understand npm, and utilize Parcel for efficient development. Enjoy coding! 🎉
+-> class="" in html, className="" in JSX both are same.
+
+5. JSX Attributes 📝
+   - Use camelCase to give attributes in JSX.
+
+6. Multiline JSX Code 🖋️
+   - For writing JSX code in multiple lines, use parentheses to wrap the code bcoz babel should now from where and till where the code is there
+     ```jsx
+     const jsxHeading = (
+       <h1 className="head">
+         Learning React 📍
+       </h1>
+     );  // Implicit Return
+     ```
+
+7. Components in React 🏗️
+   - Class-Based Component: The OLD way to create components, Function name first letter should be capital.
+   - Functional Component: The NEW way to create components, just a normal JavaScript function that returns JSX.
+     ```jsx
+     const HeadingComponent = () => {
+       return (
+         <h1>
+           📍➡️ A functional component is a normal javascript function which returns a piece of JSX code / React Element is known as an FC
+         </h1>
+       ); // Explicit Return
+     };
+     ```
+-> rendering a component : <HeadingComponent />
+8. Component Composition 🔗
+   - Calling a functional component inside another functional component or nested functional components is known as component composition.
+
+-> In `{}` u can write any logic of javascript / expression of js -> we can also call functinal component as {HeadingComponent()}
+-> In react we can use React Element inside a Functional component and vice varsa.
+
+9. Security in React 🔒
+   - React prevents cross-site attacks or malicious attacks by sanitizing each piece of code before running it, unlike JavaScript.
+
+10. Function Calls in JSX 🔍
+    - You can call a function inside JSX using curly braces `{}`, can write any javascript code inside it and can also perform any logical operation.
+      ```jsx
+      {Title()}
+      ```
+
+
+## Episode 4: 🎓 Talk Is Cheap, Show Me The Code.
+-> we can use inline CSS in React like this, wherever we provide style attribute we have to provide it in a object:
+    eg: const styleCard = {
+        backgroundColor: "green"
+    }
+
+    cosnt RestaurantCard = () => {
+        return (
+            <div className="res-card" style={styleCard}>
+                <h1>Ayush Food's Center</h1>
+            </div>
+        )
+    }
+
+1. 🧩 Functional Components: At the end of the day, a functional component is just a regular javascript function.🪧 Similarly, `props` are simply arguments passed to this function, react just wrap props inside an object and pass in functions as props.
+
+-> Props are just pass in the form of object
+
+2. 🚫 Props Are Immutable: `props` cannot be changed once set.
+
+3. 🛠️ Config Driven UI: Create a UI based on provided configuration, keeping the config in one place, and the UI is dynamically generated based on that.
+   - 📍 Location-Based Config: Configurations can be driven by user location to customize the UI based on regional preferences or requirements. This allows for more dynamic and personalized interfaces.
+
+   - 📦 Reusability: Config Driven UIs promote reusability and scalability, as changes can be made centrally in the configuration without altering the core code.
+
+-> how to use props properly
+    const RestaurantCard = (props) => {
+        const {resData(~~ here ~~)} = props;
+        return (
+            <div className="res-card">
+                <h1>{resData.name}</h1>
+            </div>
+        )
+    }
+    
+    const resObj = {....};
+    <RestaurantCard (~~ whatever ll'be the name of key is should be pass there ~~)resData={resObj} />
+
+4. 🔑 Keys in Lists: When using the `map()` function to iterate over an array, always pass a unique `key` to the parent element. This helps React identify and update elements efficiently.
+
+   - ❌ Avoid Index as Key: Never use the array index as the key unless there is no unique ID available.
+
+
+
+## Episode 5: Let's Get Hooked 🪝
+
+1. 📚 Libraries and frameworks it makes ur developer experience easy, it makes you write less code and do more on the webpage.
+
+2. 🚫 Never keep hard-coded strings inside a component like (eg: url)
+
+-> write utilites hard coded data in a separate file and import it in the main file.
+    eg: utils -> cosntant.js -> export const CDN_URL = "https://api.com"; 
+        and write file name in camelCase only and variables name in SNAKE_CASE.
+
+3. 🔄 first give and then take --> export and import
+   Import & Export: Code likh ke elements ko export karna aur jo main file hai uske andar import karna.
+    eg: sidebar, footer, cards --> export karna
+        main file --> import karna
+
+    a)export:
+        i.single element export:
+            eg: function Card(){}
+
+                export default Card;
+
+        ii.named export:
+            eg: export function Add(){}
+                export function Remove(){}
+
+
+    b)import:
+        i.single element import:
+            eg: import Cart from "./fileName.jsx/js"
+
+        ii.named imports:
+            eg: import {Add, Remove} from "./fileName.jsx/js"
+
+   Q: Can we use default import and named import in the same file?
+   A: Yes, both can be used simultaneously without any errors.
+
+
+
+4. 📏 Keep component files code under 100 lines & if it excceds then create another component.
+
+-> React is Fast & Efficient at DOM Manipulation.
+
+5. 💪 State Variable: `useState()` whenever we call useState() it gives a state variable
+   ```javascript
+   const [val, setVal] = useState({ name: 'Ayush' }); 
+
+   const arr = useState({ name: 'Ayush' });   -> this is array destructing
+    const [val, setVal] = arr;
+   ```
+   - in useState() the 2nd function is responsible for reconciliation algorithm and updates the UI / state variable.
+
+
+   - The initial state is assigned to `val`.
+   - `setVal` updates `val`.
+   - Whenever a state variable is updated react re-renders the component.
+   - React syncs data with the UI, updating the UI when data changes.
+
+6. 🔧 React Hook: A normal JavaScript function provided by React it has it's own specific purpose to use it.
+
+7. ⚙️ Types of Utility Functions:
+   - `useState()`: Super powerful state variable
+     - Keeps data in sync with the UI.
+     - Efficient DOM manipulation.
+
+8. 🎬 React Behind the Scenes:
+   - Uses Reconciliation Algorithm (React Fiber) to update the DOM and UI (introduced in React-16 version).
+   - Virtual DOM representation of the actual DOM.
+   - Diff Algorithm finds the difference between OLD virtual DOM & NEW virtual DOM and try to update it on every render cycle.
+   - More on React Fiber: React's Core Algorithm [React Fiber Architecture](https://github.com/acdlite/react-fiber-architecture)
+
+9. ⚡ Why React is Fast:
+   - Efficient DOM manipulation using the Virtual DOM.
+   - Uses Diff Algorithm for comparing Virtual DOM and actual DOM.
+   - Uses Reconciliation Algorithm to update the DOM.
+
+10. Whenever an element name starting with `use` then it's a hook.
+
+
+## Episode 6: Exploring the World 🌍
+
+1. Monolith Architecture: This architecture combines the API, frontend, backend, authentication, and database into a single application. 🏢 Everything is interconnected, making it simpler but less flexible for scaling and updates.
+
+2. Microservices Architecture: Here, each functionality like API, frontend, backend, authentication, and database is separated into individual services. 🛠️🔗 This approach follows the principles of separation of concerns and single responsibility, providing flexibility and scalability. In today's world, microservices are becoming the norm.
+
+-> We are creating UI Microservices and Microservices are written in various languages like React(UI), Backend(Java), Database(MySQL), etc.
+
+3. Load ➔ Render ➔ API ➔ Render: This sequence illustrates the process of loading a page, rendering the initial UI, fetching data from an API, and then rendering the updated UI. 🔄
+
+4. useEffect(callback, [dependencies]): 
+   - `useEffect` is a hook that takes a callback function and an array of dependencies. The callback runs after the component is rendered. 📅
+   - Example:
+     ```javascript
+     useEffect(() => {
+         console.log("useEffect Called");
+     }, []);
+     ```
+   - This hook helps manage side effects like fetching data or setting up subscriptions.
+   - First the Body of the component  is rendered and after that useEffect is called.
+
+5. fetch(): This is a powerful function provided by the browser's JS engine to fetch data from a server. 🌐📬 It enables asynchronous operations, making web applications dynamic and interactive.
+
+6. Shimmer UI: Instead of using traditional loaders like gifs, images, or videos, modern applications use `Shimmer UI`. ✨🚫🖼️ This technique provides a skeleton screen that mimics the page's layout, enhancing user experience during data loading.
+
+7. Conditional Rendering: This involves rendering components based on certain conditions. 🔄❓ It ensures that only the necessary components are displayed, optimizing performance and user experience.
+    eg:if(listOfRestaurant.length === 0){
+        return <Shimmer />;
+    }
+
+8. Component Re-rendering: When a small change occurs in a component, the entire component re-renders. However, only the changed code is updated, while the rest remains the same. 🔄🖥️ React efficiently manages these updates to maintain performance.
+
+9. State Updates and Reconciliation: Whenever a state variable updates, React triggers a reconciliation cycle, re-rendering the component. 🔄 This process ensures the UI is in sync with the state changes.
+
+-> Whenever State variable update, react triggers a reconciliation cycle(re-renders the component)
+
+10. React Fiber: The new reconciliation algorithm in React, called Fiber, efficiently finds differences between two virtual DOMs, new VD and old VD and updates the modified code only. ⚡🌐 It updates only the changed parts of the component, making React fast and responsive. This behind-the-scenes optimization is key to React's performance.
+
+React's efficient handling of state changes, component updates, and rendering processes ensures a smooth and dynamic user experience.
+
+
+## Episode 7: Finding The Path: About Routing 🛣️, Hooks like useState & useEffect
+
+1. useEffect(callback, [dependency]):
+   - Whenever the component is rendered, `useEffect` is called. If the dependency array is empty, `useEffect` is called only once. If the dependency array has values, `useEffect` is called whenever any of those values change. 🔄📅
+     - `dependency` is not mandatory in `useEffect`. If not provided, `useEffect` is called every time the component is rendered. 🔄📅
+     - An empty dependency array ensures `useEffect` is called only once. 🔄📅
+     - If the dependency array contains values, `useEffect` is called whenever those values update. 🔄📅
+
+2. useState():
+   - Do not create `useState` outside your component. 🚫 Avoid creating `useState` inside conditional statements, loops, or functions. ❌🔁
+     ```javascript
+     // Incorrect usage
+     for() {
+        const [name, setName] = useState("Ayush");
+     }
+
+     if() {
+        const [name, setName] = useState("Ayush");
+     }
+
+     function xyz() {
+        const [name, setName] = useState("Ayush");
+     }
+     ```
+   - `useState` is used to create local variables in your functional component. 📦 Call it at the top of your component. 🔝
+
+3. react-router-dom:
+   - Used for navigating between multiple pages in a React application. 🛤️
+   - Install with `npm i react-router-dom`. 📦
+   - `createBrowserRouter` and `RouterProvider` configure routing in your app. ⚙️
+   - `Outlet` is a component that gets filled by the child components of a route. Behind the scenes, it converts into the component of that route in the HTML. 🧩
+   - To create routes:
+     ```javascript
+     import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
+
+     const AppLayout = () => {
+         return (
+             <div className='app'>
+                 <Header />
+                 <Outlet />  // Children components of the route are filled here.
+             </div>
+         );
+     };
+
+     const appRouter = createBrowserRouter([
+         {
+             path: '/',
+             element: <AppLayout />,
+             children: [
+                 {
+                     path: '/',
+                     element: <Body />
+                 },
+                 {
+                     path: '/about',
+                     element: <About />  // /about path shows About component
+                 },
+                 {
+                     path: '/contact',
+                     element: <Contact />
+                 }
+             ],
+             errorElement: <Error />  // Path not found shows Error component
+         },
+     ]);
+
+     // Provide routing configuration to our app.
+     root.render(<RouterProvider router={appRouter} />);
+     ```
+
+    - wherever u see `use` before any variable it's a hook.
+
+   - `useRouteError`: A hook provided by `react-router-dom` that gives more data related to routing errors. 🚨
+   - Never use `<a></a>` tags to link pages in React because they refresh the page and cause a full re-render. Use `Link` instead, which is provided by `react-router-dom`: 🔗🚫
+     ```javascript
+     import { Link } from 'react-router-dom';
+     <Link to='/about'>About</Link>
+     ```
+   - Behind the scenes, `Link` is converted to an `<a href="#"></a>` tag. 🔗
+
+4. Types of Routing:
+    - Client-Side Routing in React 16
+
+1. Definition: Routing is managed in the browser using React components.
+2. Location: Routes are handled within the React application.
+3. URL Handling: React Router manages URL changes without full page reloads.
+4. Page Loading: Only the components associated with the route are re-rendered.
+5. Performance: Fast transitions since only parts of the UI are updated.
+6. Example: Using `react-router-dom` for routing.
+   - Basic Setup: 
+     ```jsx
+     import React from 'react';
+     import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+     const Home = () => <h2>Home Page</h2>;
+     const About = () => <h2>About Page</h2>;
+
+     function App() {
+       return (
+         <Router>
+           <Switch>
+             <Route path="/" exact component={Home} />
+             <Route path="/about" component={About} />
+           </Switch>
+         </Router>
+       );
+     }
+
+     export default App;
+     ```
+
+    - Server-Side Routing with React 16
+
+1. Definition: Routing is managed by the server and serves different HTML pages based on the route.
+2. Location: Routes are handled on the server before sending a response to the client.
+3. URL Handling: Each URL request results in a new page load from the server.
+4. Page Loading: The server provides the full HTML page for each route.
+5. Performance: Slower transitions due to complete page reloads.
+6. Example: When using server-side rendering (SSR) with frameworks like Next.js.
+   - Basic Setup in Next.js:
+     ```jsx
+     // pages/index.js
+     export default function Home() {
+       return <h1>Home Page</h1>;
+     }
+
+     // pages/about.js
+     export default function About() {
+       return <h1>About Page</h1>;
+     }
+     ```
+
+
+5. useParams:
+   - The `useParams` hook in React Router is used to access URL parameters in a component. It returns an object of key-value pairs where the key is the parameter name and the value is the parameter value. 🗺️🔑
+
+## Episode 8: Let's get classy 🎩: class Based Component
+    1. Class based component: A Normal JS class which extends React.Component and have a render method which return's a peice of jsx code.
+        - older way to defining a component
+        - it's a normal javascript class
+        - CBC syntax:
+            class componentName extends React.Component{
+                render(){
+                    return(
+                        <h1>Class Based Component</h1>
+                    )
+                }
+            }
+        (- FBC has function which returns a peice of JSX code.
+        - CBC has a render method which returns a peice of JSX code.)
+        -? why we write super(props) in constructor?
+            - super(props) is used to call the constructor of the parent class.
+            - it's used to access the parent class's properties and methods.
+
+    2. State variable in CBC: big object contains all the state variables
+        eg: this.state = {
+            count: 0,
+            count2: 2
+        }
+        render(){ this.state={count:0, count2:1} }
+        
+        NEVER UPDATE STATE VARIABLE DIRECTLY USING ASSIGHMENT OPERATOR NOTE IT!!
+
+        - to update the state varialbe in CBC use `setState({ stateVariable })` to update
+            eg: <h1>Count : {count}</h1>
+                <button onClick={() => {
+                    this.setState({
+                        count:this.state.count + 1,
+                        count2:this.state.count2 + 1,
+                    })
+                }} className='border rounded-lg'>Count Increase</button>
+
+        - how this CBC is mounted/loaded on to the application
+            ->loading of Class-Based Component
+            ->after this constructor is load a new instance of class is created
+            ->& after that render is called
+            ->after then `componentDidMount ` method is called
+            -> after we navigate to another page `componentWillUnmount` is called.
+
+        - lifeCycle Method of Class-Based Component
+            -> first `Parent Constructor` is rendered/mounted
+            -> then `Parent Render` is rendered
+            -> at the end of the `Parent Render` there is Child Class-Based Component.
+            -> inside Child CBC `Child Constructor` is rendered
+            -> then `Child Render` is rendered
+            -> then `Child componentDidMount` is rendered
+            -> then `Parent componentDidMount` is rendered
+            --> that's we make api call inside an `componentDidMount`
+
+        - Childrens lifecycle method diagram - [https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/]
+            How it works
+            - Parent Constructor
+            - Parent Render
+
+                - First Child Constructor
+                - First Child Render
+
+                - Second Child Constructor
+                - Second Child Render
+
+                - First ComponentDidMound
+                - Second ComponentDidMound
+
+            - Parent ComponentDidMound
+
+        - it will batch the first child and second child and then it will render the parent componentDidMount.
+
+    3. In Depth of Class-Based Component
+        - Never Ever compare lifeCycle method with functinal-based Component 
+            eg: useEffect
+
+        - On Every First Render `ComponentDidMount` is called and after every subsequent render it is updated it is not mounted it is updated.
+
+        - we have to use `componentWillUnmount` also bcoz if we don't use it then `componentDidMount` will be called again and again when we navigate to the same page.
+
+        - 👉 Again watch this extra live session of 47 minutes only but worth it. 👈
+
+## Episode 9: Optimising Our App
+    - Single Responsibility Principle: reusable, maintainable, testable
+        - every functon or component should have it's own single responsibility.
+
+    - a hook at the end of the day is nothing but the utility function only.
+
+    - custom hooks
+        - while creating custom hooks always use `use` before the name of the custom hook, it's a best practice
+
+    - Chunking, Code Splitting, Dynamic Bundling, lazy loading, Dynamic loading -> all these are used to make the code presize or divide the code in the different files to reduce the website loading time.
+    - lazy loading, on demand loading -> load on the user demand
+
+    - lazy() is a function given by a react package to load the component on demand.
+        - import {lazy} from "react"; -> named import
+        - it takes an callback function which returns the import statement of the component.
+        - const About = lazy(() => import("./About"));
+
+    - Suspense: it's a component given by react to show the loader while the component is loading.
+        - wrap the lazy component inide the Suspense component.
+        eg: <Suspense fallback={<h1>Loading...</h1> `we can also pass shimmer ui inside this`}>
+                <About />
+            </Suspense>
+
+## Episode 10: Jo Dikhta Hai, Vo Bikta Hai.
+    - SASS & SCSS -> used for styling but not good for production level 
+    - styled component -> [https://styled-components.com/]
+    - material ui -> [https://mui.com/material-ui/]
+    - bootstrap -> [https://getbootstrap.com/]
+    - chakra ui -> [https://v2.chakra-ui.com/]
+    - ant design -> [https://ant.design/]
+    - tailwind css -> [https://tailwindcss.com/]
+
+    - installation proccess for parcel - [https://tailwindcss.com/docs/guides/parcel]
+
+    - cons of tailwind
+        - less readablitiy 
+        - and looks ugly in the code
+
+    - now every website should have a dark mode
+
+## Episode 11: Data is the new Oil
+    - Higher Order Component : HOC is a function which takes a component inside it & enhances back and return   component, at the end of the day normal javascript function.
+
+    - React has two layers i.e UI Layer & Data Layer (UI Layer is powered by DATA layers)
+
+    - Drop down menu or content is also known as accordion.
+
+    - Controlled and UnControlled component: 
+        - Controlled : the parent can control the child component is called as controlled component.
+
+        - UnControlled : the parent can't control the child component it has it's own control  is called as uncontrolled component.
+
+    - lifting the state up[https://react.dev/learn/sharing-state-between-components#lifting-state-up-by-example]
+
+    - props drilling documentation[https://react.dev/learn/passing-data-deeply-with-context#the-problem-with-passing-props]
+
+    - A global place where anybody can access it is known as react context.
 
 
 
